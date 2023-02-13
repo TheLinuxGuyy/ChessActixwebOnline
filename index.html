@@ -1,125 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chess</title>
-</head>
-<body>
-    <script type="module">
-        import init, {add} from './pkg/code.js'
-        await init()
-        console.log(add(1,2))
-    </script>
-    <div class="chessboard">
-        <div class="white">&#9820;</div>
-        <div class="black">&#9822;</div>
-        <div class="white">&#9821;</div>
-        <div class="black">&#9819;</div>
-        <div class="white">&#9818;</div>
-        <div class="black">&#9821;</div>
-        <div class="white">&#9822;</div>
-        <div class="black">&#9820;</div>
-        <!-- 2nd -->
-        <div class="black">&#9821;</div>
-        <div class="white">&#9821;</div>
-        <div class="black">&#9821;</div>
-        <div class="white">&#9821;</div>
-        <div class="black">&#9821;</div>
-        <div class="white">&#9821;</div>
-        <div class="black">&#9821;</div>
-        <div class="white">&#9821;</div>
-        <!-- 3th -->
-        <div class="white"></div>
-        <div class="black"></div>
-        <div class="white"></div>
-        <div class="black"></div>
-        <div class="white"></div>
-        <div class="black"></div>
-        <div class="white"></div>
-        <div class="black"></div>
-        <!-- 4st -->
-        <div class="black"></div>
-        <div class="white"></div>
-        <div class="black"></div>
-        <div class="white"></div>
-        <div class="black"></div>
-        <div class="white"></div>
-        <div class="black"></div>
-        <div class="white"></div>
-        <!-- 5th -->
-        <div class="white"></div>
-        <div class="black"></div>
-        <div class="white"></div>
-        <div class="black"></div>
-        <div class="white"></div>
-        <div class="black"></div>
-        <div class="white"></div>
-        <div class="black"></div>
-        <!-- 6th -->
-        <div class="black"></div>
-        <div class="white"></div>
-        <div class="black"></div>
-        <div class="white"></div>
-        <div class="black"></div>
-        <div class="white"></div>
-        <div class="black"></div>
-        <div class="white"></div>
-        <!-- 7th -->
-        <div class="white">&#9817;</div>
-        <div class="black">&#9817;</div>
-        <div class="white">&#9817;</div>
-        <div class="black">&#9817;</div>
-        <div class="white">&#9817;</div>
-        <div class="black">&#9817;</div>
-        <div class="white">&#9817;</div>
-        <div class="black">&#9817;</div>
-        <!-- 8th -->
-        <div class="black">&#9814;</div>
-        <div class="white">&#9816;</div>
-        <div class="black">&#9815;</div>
-        <div class="white">&#9813;</div>
-        <div class="black">&#9812;</div>
-        <div class="white">&#9815;</div>
-        <div class="black">&#9816;</div>
-        <div class="white">&#9814;</div>
-        </div>
-    <style>
-        body {
-    background: #e8e7de;
-    font-family: 'Montserrat', sans-serif;
-  }
-  .chessboard {
-      width: 640px;
-      height: 640px;
-      margin: 20px;
-      border: 10px solid #000;
-      border-radius: 4px;
-  background: #505050;
-  box-shadow:  5px 5px 8px #bebdb6,
-               -5px -5px 8px #ffffff;
-  }
-  .black {
-      float: left;
-      width: 80px;
-      height: 80px;
-      background-color: #505050;
-        font-size:50px;
-      text-align:center;
-      display: table-cell;
-      vertical-align:middle;
-  }
-  .white {
-      float: left;
-      width: 80px;
-      height: 80px;
-      background-color: #ffcfb6;
-      font-size:50px;
-      text-align:center;
-      display: table-cell;
-      vertical-align:middle;
-  }
-    </style>
-</body>
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <style>
+            .chess-board { border-spacing: 0; border-collapse: collapse; }
+            .chess-board th { padding: .5em; }
+            .chess-board th + th { border-bottom: 1px solid #000; }
+            .chess-board th:first-child,
+            .chess-board td:last-child { border-right: 1px solid #000; }
+            .chess-board tr:last-child td { border-bottom: 1px solid; }
+            .chess-board th:empty { border: none; }
+            .chess-board td { width: 1.5em; height: 1.5em; text-align: center; font-size: 32px; line-height: 0;}
+            .chess-board .light { background: #eee; }
+            .chess-board .dark { background: #aaa; }
+        </style>
+            <script type="module">
+                import init, {add} from './pkg/code.js'
+                import {move} from './pkg/code.js'
+                await init()
+                console.log(add(1,2))
+
+            </script>
+    </head>
+    <body>
+        <table class="chess-board">
+            <tbody>
+                <tr>
+                    <th></th>
+                    <th>a</th>
+                    <th>b</th>
+                    <th>c</th>
+                    <th>d</th>
+                    <th>e</th>
+                    <th>f</th>
+                    <th>g</th>
+                    <th>h</th>
+                </tr>
+                <tr>
+                    <th>8</th>
+                    <td name="a8" class="light">♜</td>
+                    <td name="b8" class="dark">♞</td>
+                    <td name="c8" class="light">♝</td>
+                    <td name="d8" class="dark">♛</td>
+                    <td name="e8" class="light">♚</td>
+                    <td name="f8" class="dark">♝</td>
+                    <td name="g8" class="light">♞</td>
+                    <td name="h8" class="dark">♜</td>
+                </tr>
+                <tr>
+                    <th>7</th>
+                    <td name="a7" class="dark">♟</td>
+                    <td name="b7" class="light">♟</td>
+                    <td name="c7" class="dark">♟</td>
+                    <td name="d7" class="light">♟</td>
+                    <td name="e7" class="dark">♟</td>
+                    <td name="f7" class="light">♟</td>
+                    <td name="g7" class="dark">♟</td>
+                    <td name="h7" class="light">♟</td>
+                </tr>
+                <tr>
+                    <th>6</th>
+                    <td name="a6" class="light"></td>
+                    <td name="b6" class="dark"></td>
+                    <td name="c6" class="light"></td>
+                    <td name="d6" class="dark"></td>
+                    <td name="e6" class="light"></td>
+                    <td name="f6" class="dark"></td>
+                    <td name="g6" class="light"></td>
+                    <td name="h6" class="dark"></td>
+                </tr>
+                <tr>
+                    <th>5</th>
+                    <td name="a5" class="dark"></td>
+                    <td name="b5" class="light"></td>
+                    <td name="c5" class="dark"></td>
+                    <td name="d5" class="light"></td>
+                    <td name="e5" class="dark"></td>
+                    <td name="f5" class="light"></td>
+                    <td name="g5" class="dark"></td>
+                    <td name="h5" class="light"></td>
+                </tr>
+                <tr>
+                    <th>4</th>
+                    <td name="a4" class="light"></td>
+                    <td name="b4" class="dark"></td>
+                    <td name="c4" class="light"></td>
+                    <td name="d4" class="dark"></td>
+                    <td name="e4" class="light"></td>
+                    <td name="f4" class="dark"></td>
+                    <td name="g4" class="light"></td>
+                    <td name="h4" class="dark"></td>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <td name="a3" class="dark"></td>
+                    <td name="b3" class="light"></td>
+                    <td name="c3" class="dark"></td>
+                    <td name="d3" class="light"></td>
+                    <td name="e3" class="dark"></td>
+                    <td name="f3" class="light"></td>
+                    <td name="g3" class="dark"></td>
+                    <td name="h3" class="light"></td>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <td name="a2" class="light">♙</td>
+                    <td name="b2" class="dark">♙</td>
+                    <td name="c2" class="light">♙</td>
+                    <td name="d2" class="dark">♙</td>
+                    <td name="e2" class="light">♙</td>
+                    <td name="f2" class="dark">♙</td>
+                    <td name="g2" class="light">♙</td>
+                    <td name="h2" class="dark">♙</td>
+                </tr>
+                <tr>
+                    <th>1</th>
+                    <td name="a1" class="dark">♖</td>
+                    <td name="b1" class="light">♘</td>
+                    <td name="c1" class="dark">♗</td>
+                    <td name="d1" class="light">♕</td>
+                    <td name="e1" class="dark">♔</td>
+                    <td name="f1" class="light">♗</td>
+                    <td name="g1" class="dark">♘</td>
+                    <td name="h1" class="light">♖</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
 </html>
