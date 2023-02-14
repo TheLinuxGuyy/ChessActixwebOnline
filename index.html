@@ -24,7 +24,7 @@
             </script>
     </head>
     <body>
-        <table id="chess-board">
+        <table class="chess-board">
             <tbody>
                 <tr>
                     <th></th>
@@ -128,7 +128,7 @@
             </tbody>
         </table>
         <script>
-        const ChessBoard = document.getElementsByTagName("chess-board");
+        const ChessBoard = document.getElementsByClassName("chess-board");
 
         const buttonPressed = e => {
         console.log(e.target.id);  // Get ID of Clicked Element
