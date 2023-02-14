@@ -134,9 +134,11 @@
                 let FromPeicePos = document.getElementById(FromTo[0]);
                 let FromPeice = document.getElementById(FromTo[0]).innerText;
                 let ToPeice = document.getElementById(FromTo[1]);
-                var text = document.createTextNode(FromPeice);
-                FromPeicePos.innerText = "";
-                ToPeice.appendChild(text);
+                if(ToPeice.innerText==""){
+                    var text = document.createTextNode(FromPeice);
+                    FromPeicePos.innerText = "";
+                    ToPeice.appendChild(text);
+                }
                 FromTo = [];
             }
         }
