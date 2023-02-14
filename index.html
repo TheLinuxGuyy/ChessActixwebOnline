@@ -24,7 +24,7 @@
             </script>
     </head>
     <body>
-        <table class="chess-board">
+        <table id="chess-board">
             <tbody>
                 <tr>
                     <th></th>
@@ -127,5 +127,16 @@
                 </tr>
             </tbody>
         </table>
+        <script>
+        const ChessBoard = document.getElementsByTagName("chess-board");
+
+        const buttonPressed = e => {
+        console.log(e.target.id);  // Get ID of Clicked Element
+        }
+
+        for (let square of ChessBoard) {
+        square.addEventListener("click", buttonPressed);
+        }
+        </script>
     </body>
 </html>
