@@ -15,13 +15,6 @@
             .chess-board .light { background: #eee; }
             .chess-board .dark { background: #aaa; }
         </style>
-            <script type="module">
-                import init, {add} from './pkg/code.js'
-                import {move} from './pkg/code.js'
-                await init()
-                console.log(add(1,2))
-
-            </script>
     </head>
     <body>
         <table id="chess-board" class="chess-board">
@@ -128,12 +121,24 @@
             </tbody>
         </table>
         <script>
+        //import init, {add} from './pkg/code.js'
+        //import {move} from './pkg/code.js'
+        //await init()
         var ChessBoard = document.getElementById('chess-board');
         var squares = ChessBoard.getElementsByTagName('td');
-
+        var FromTo = [];
         console.log(squares)
         const buttonPressed = e => {
-            console.log(e.target.id);
+            FromTo.push(e.target.id);
+            if(FromTo.length==2){
+                let FromPeicePos = document.getElementById(FromTo[0]);
+                let FromPeice = document.getElementById(FromTo[0]).innerText;
+                let ToPeice = document.getElementById(FromTo[1]);
+                var text = document.createTextNode(FromPeice);
+                FromPeicePos.innerText = "";
+                ToPeice.appendChild(text);
+                FromTo = [];
+            }
         }
 
         for (let square of squares) {
