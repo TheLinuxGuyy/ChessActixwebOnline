@@ -32,25 +32,25 @@
                 </tr>
                 <tr>
                     <th>8</th>
-                    <td id="a8" class="light">♜</td>
-                    <td id="b8" class="dark">♞</td>
-                    <td id="c8" class="light">♝</td>
-                    <td id="d8" class="dark">♛</td>
-                    <td id="e8" class="light">♚</td>
-                    <td id="f8" class="dark">♝</td>
-                    <td id="g8" class="light">♞</td>
-                    <td id="h8" class="dark">♜</td>
+                    <td name="white" id="a8" class="light">♜</td>
+                    <td name="white" id="b8" class="dark">♞</td>
+                    <td name="white" id="c8" class="light">♝</td>
+                    <td name="white" id="d8" class="dark">♛</td>
+                    <td name="white" id="e8" class="light">♚</td>
+                    <td name="white" id="f8" class="dark">♝</td>
+                    <td name="white" id="g8" class="light">♞</td>
+                    <td name="white" id="h8" class="dark">♜</td>
                 </tr>
                 <tr>
                     <th>7</th>
-                    <td id="a7" class="dark">♟</td>
-                    <td id="b7" class="light">♟</td>
-                    <td id="c7" class="dark">♟</td>
-                    <td id="d7" class="light">♟</td>
-                    <td id="e7" class="dark">♟</td>
-                    <td id="f7" class="light">♟</td>
-                    <td id="g7" class="dark">♟</td>
-                    <td id="h7" class="light">♟</td>
+                    <td name="white" id="a7" class="dark">♟</td>
+                    <td name="white" id="b7" class="light">♟</td>
+                    <td name="white" id="c7" class="dark">♟</td>
+                    <td name="white" id="d7" class="light">♟</td>
+                    <td name="white" id="e7" class="dark">♟</td>
+                    <td name="white" id="f7" class="light">♟</td>
+                    <td name="white" id="g7" class="dark">♟</td>
+                    <td name="white" id="h7" class="light">♟</td>
                 </tr>
                 <tr>
                     <th>6</th>
@@ -98,25 +98,25 @@
                 </tr>
                 <tr>
                     <th>2</th>
-                    <td id="a2" class="light">♙</td>
-                    <td id="b2" class="dark">♙</td>
-                    <td id="c2" class="light">♙</td>
-                    <td id="d2" class="dark">♙</td>
-                    <td id="e2" class="light">♙</td>
-                    <td id="f2" class="dark">♙</td>
-                    <td id="g2" class="light">♙</td>
-                    <td id="h2" class="dark">♙</td>
+                    <td name="black" id="a2" class="light">♙</td>
+                    <td name="black" id="b2" class="dark">♙</td>
+                    <td name="black" id="c2" class="light">♙</td>
+                    <td name="black" id="d2" class="dark">♙</td>
+                    <td name="black" id="e2" class="light">♙</td>
+                    <td name="black" id="f2" class="dark">♙</td>
+                    <td name="black" id="g2" class="light">♙</td>
+                    <td name="black" id="h2" class="dark">♙</td>
                 </tr>
                 <tr>
                     <th>1</th>
-                    <td id="a1" class="dark">♖</td>
-                    <td id="b1" class="light">♘</td>
-                    <td id="c1" class="dark">♗</td>
-                    <td id="d1" class="light">♕</td>
-                    <td id="e1" class="dark">♔</td>
-                    <td id="f1" class="light">♗</td>
-                    <td id="g1" class="dark">♘</td>
-                    <td id="h1" class="light">♖</td>
+                    <td name="black" id="a1" class="dark">♖</td>
+                    <td name="black" id="b1" class="light">♘</td>
+                    <td name="black" id="c1" class="dark">♗</td>
+                    <td name="black" id="d1" class="light">♕</td>
+                    <td name="black" id="e1" class="dark">♔</td>
+                    <td name="black" id="f1" class="light">♗</td>
+                    <td name="black" id="g1" class="dark">♘</td>
+                    <td name="black" id="h1" class="light">♖</td>
                 </tr>
             </tbody>
         </table>
@@ -127,7 +127,9 @@
         var ChessBoard = document.getElementById('chess-board');
         var squares = ChessBoard.getElementsByTagName('td');
         var FromTo = [];
-        console.log(squares)
+        function movecolor(id,color) {  
+            document.getElementById(id.id).setAttribute("name",color);
+        }
         const buttonPressed = e => {
             FromTo.push(e.target.id);
             if(FromTo.length==2){
@@ -138,6 +140,16 @@
                     var text = document.createTextNode(FromPeice);
                     FromPeicePos.innerText = "";
                     ToPeice.appendChild(text);
+                    movecolor(ToPeice,FromPeicePos.getAttribute("name"));
+                }else{
+                    if(ToPeice.getAttribute("name") != FromPeicePos.getAttribute("name")){
+                        var text = document.createTextNode(FromPeice);
+                        FromPeicePos.innerText = "";
+                        ToPeice.innerText=""
+                        ToPeice.appendChild(text);
+                        movecolor(ToPeice,FromPeicePos.getAttribute("name"));
+
+                    }
                 }
                 FromTo = [];
             }
