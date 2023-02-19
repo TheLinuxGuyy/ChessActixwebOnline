@@ -1,9 +1,20 @@
 use actix_web::{get, web,HttpResponse,http::StatusCode ,App, HttpServer, Responder};
 use tera::{Tera,Context};
 use actix_web::middleware::Logger;
+use rand::prelude::*;
 #[get("/")]
-async fn greet(name: web::Path<String>) -> impl Responder {
-    
+async fn homepage(name: web::Path<String>) -> impl Responder {
+   format!("Hello {}!", &name) 
+}
+#[post("/")]
+async fn redirectlobby(){
+
+}
+
+
+#[get("/lobby/{lobby_number}")]
+async fn lobby(lobby_number: web::Path<String>) -> impl Responder{
+
 }
 
 #[actix_web::main]
