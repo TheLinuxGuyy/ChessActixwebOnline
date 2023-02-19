@@ -1,14 +1,16 @@
 use actix_web::{get, web,HttpResponse,http::StatusCode ,App, HttpServer, Responder};
 use tera::{Tera,Context};
 use actix_web::middleware::Logger;
-use rand::prelude::*;
+use rand::Rng;
 #[get("/")]
 async fn homepage(name: web::Path<String>) -> impl Responder {
    format!("Hello {}!", &name) 
 }
 #[post("/")]
 async fn redirectlobby(){
-
+    let mut rng = rand::thread_rng();
+    let randomnumber: u8 = rng.gen();
+    Redirect::to("https://127.0.0.1:8080/lobby/{}",randomnumber);
 }
 
 
