@@ -19,6 +19,5 @@ fn handle_client(stream: TcpStream){
             break;
         }
         stream.get_ref().write(buf.as_bytes()).unwrap();
-        
     }
 }
