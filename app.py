@@ -25,7 +25,7 @@ class Chess:
             new_lobby=Lobbies(lobby_number=lobby_number)
             db.session.add(new_lobby)
             db.session.commit()
-            redirect(f"/lobby/{str(random.randint(0,400))}")
+            redirect(f"/lobby/{str(random.randint(1000,9999))}")
         return render_template("main.html")
     
     @app.route("/lobby/<string:lobbynumber>")
