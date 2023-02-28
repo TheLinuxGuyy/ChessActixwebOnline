@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 use wqsm_bindgen::prelude::*;
 use tungstenite::{connect, Message};
 use url::Url;
@@ -21,4 +18,3 @@ fn main() {    // Connect to the WS server locally
         println!("{:?}", parsed["result"]);
     }
 }
->>>>>>> a5d34f9 (commit)
