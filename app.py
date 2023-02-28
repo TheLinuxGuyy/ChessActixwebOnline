@@ -13,6 +13,7 @@ db = SQLAlchemy()
 CURRENT_LOBBIES=dict()
 def create_database():
     app.app_context().push()
+    db.init_app(app)
     db.create_all()
 create_database()
 
@@ -44,7 +45,7 @@ class Chess:
                     lobby_number_db= Lobbies.query.filter_by(lobby_number=lobby_number).first()
             new_lobby=Lobbies(lobby_number=lobby_number)
             db.session.add(new_lobby)
-            db.session.commit()
+            db.session.commit() 
             for lobby in Lobbies.query.all():
                 if lobby.lobby_number in CURRENT_LOBBIES.keys():
                     registered_lobby=True
@@ -58,7 +59,7 @@ class Chess:
     
     @app.route("/lobby/<string:lobbynumber>")
     def lobby(lobbynumber):
-        return render_template("index.html")
+        return render_template("index.html",lobbynumber=lobbynumber)
     
 
 
