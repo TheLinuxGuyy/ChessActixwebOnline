@@ -4,7 +4,9 @@ import requests
 from bs4 import BeautifulSoup
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
-
+import websockets
+import json
+import asyncio
 app=Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy()
@@ -17,6 +19,18 @@ create_database()
 class Lobbies(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     lobby_number = db.Column(db.String(20), nullable=False)
+
+async def resp(websocket):
+    async for message in websocket:
+        response = {
+            'result': message
+        }
+    await websocket.send(json.dumps(response))
+
+async def main(lobby_number):
+    async with websockets.serve(resp, f"https://127.0.0.1/{lobby_number}", 8765):
+        await asyncio.Future()  # run forever
+
 
 class Chess:
     @app.route("/",methods=["GET","POST"])
@@ -36,7 +50,9 @@ class Chess:
                     registered_lobby=True
                 else:
                     CURRENT_LOBBIES[lobby.lobby_number]=1
+
             
+            asyncio.run(main(lobby_number))
             redirect(f"/lobby/{lobby_number}")
         return render_template("main.html")
     
@@ -44,5 +60,9 @@ class Chess:
     def lobby(lobbynumber):
         return render_template("index.html")
     
+
+
 if __name__=="__main__":
     app.run()
+
+
