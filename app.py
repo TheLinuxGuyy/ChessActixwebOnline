@@ -9,7 +9,8 @@ import json
 import asyncio
 app=Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-db = SQLAlchemy()
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 CURRENT_LOBBIES=dict()
 def create_database():
     app.app_context().push()
@@ -52,14 +53,16 @@ class Chess:
                 else:
                     CURRENT_LOBBIES[lobby.lobby_number]=1
 
-            
             asyncio.run(main(lobby_number))
             redirect(f"/lobby/{lobby_number}")
         return render_template("main.html")
     
     @app.route("/lobby/<string:lobbynumber>")
     def lobby(lobbynumber):
-        return render_template("index.html",lobbynumber=lobbynumber)
+        lobby_exists=Lobbies.query.filter_by(lobby_number=lobbynumber).first()
+        if lobby_exists:
+            return render_template("index.html",lobbynumber=lobbynumber)
+        return "this lobby does not exist"
     
 
 
