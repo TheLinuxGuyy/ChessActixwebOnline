@@ -18,8 +18,8 @@ fn listening(){
 
 
 #[wasm_bindgen]
-pub fn connect(lobby_number) {
+pub fn connect(lobby_number:i32,frompos:String,topos: String) {
     let (mut socket, _response) = connect(Url::parse("ws://localhost:8765/{}",lobby_number).unwrap()).expect("Can't connect");    // Write a message containing "Hello, Test!" to the server
-    socket.write_message(Message::Text("Hello, Test!".into())).unwrap();
+    socket.write_message(Message::Text("{0} {1}",frompos,topos.into())).unwrap();
     listening();
 }
