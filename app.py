@@ -14,7 +14,6 @@ db = SQLAlchemy(app)
 CURRENT_LOBBIES=dict()
 def create_database():
     app.app_context().push()
-    db.init_app(app)
     db.create_all()
 create_database()
 
