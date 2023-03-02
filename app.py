@@ -23,6 +23,9 @@ class Lobbies(db.Model, UserMixin):
 
 async def resp(websocket):
     async for message in websocket:
+        #if message == "illegal":
+
+        #if message == "legal":
         response = {
             'result': message
         }

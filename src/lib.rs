@@ -19,12 +19,39 @@ fn listening(){
 
 
 #[wasm_bindgen]
-pub fn connect() {
+pub fn connect(lobby_number) {
     let (mut socket, _response) = connect(Url::parse("ws://localhost:8765/{}",lobby_number).unwrap()).expect("Can't connect");
     listening(&socket);
 }
 
+fn checking_legality(p:String,f:String,t:String){
+    alphabet = ["a","b","c","d","e","f","g","h"]
+    let result=match p{
+        "pawn" => {
+            let mut factory_positions = vec!["a7","b7","c7","d7","e7","f7","g7","h7","a2","b2","c2","d2","e2","f2","g2","h2"];
+            let number_to: i32 = t[1].parse().unwrap();
+            if(f in factory_positions){
+                if(t==f.replace(number_to.to_string(),number_to+1.to_string()) || f.replace(number_to.to_string(),number_to+2.to_string()){
+                "legal"
+                }else{
+                    "illegal"
+                }
+            }
+
+        }
+        "knight" => checking_legality("knight"),
+        "rook" => checking_legality("rook"),
+        "bishop" => checking_legality("bishop"),
+        "king" => checking_legality("king"),
+        "queen" => checking_legality("queen"),
+        _ => "not a vaild peice",
+    }
+    result
+}
+
 #[wasm_bindgen]
-pub fn send(lobby_number:i32,frompos:String,topos: String){
-    socket.write_message(Message::Text("{0} {1}",frompos,topos.into())).unwrap();
+pub fn send(lobby_number:i32,frompos:String,topos: String,peice:String){
+    result=checking_legality(&peice,&frompos,&topos)
+    socket.write_message(Message::Text(result.into())).unwrap();
+
 }
