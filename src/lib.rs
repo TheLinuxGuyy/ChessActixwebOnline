@@ -28,7 +28,7 @@ fn checking_legality(p:String,f:String,t:String,toccupied:bool){
     alphabet = ["a","b","c","d","e","f","g","h"]
     let result=match p{
         "pawn" => {
-            let mut factory_positions = vec!["a7","b7","c7","d7","e7","f7","g7","h7","a2","b2","c2","d2","e2","f2","g2","h2"];
+            let factory_positions = vec!["a7","b7","c7","d7","e7","f7","g7","h7","a2","b2","c2","d2","e2","f2","g2","h2"];
             let number_from: i32 = f[1].parse().unwrap();
             let number_to: i32 = t[1].parse().unwrap();
             let letter_from: String = f[0].parse().unwrap();
@@ -56,7 +56,9 @@ fn checking_legality(p:String,f:String,t:String,toccupied:bool){
                 }
             }
         }
-        "knight" => checking_legality("knight"),
+        "knight" =>{
+            let 
+        }
         "rook" => checking_legality("rook"),
         "bishop" => checking_legality("bishop"),
         "king" => checking_legality("king"),
