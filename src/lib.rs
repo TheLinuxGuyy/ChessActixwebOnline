@@ -24,7 +24,7 @@ pub fn connect(lobby_number) {
     listening(&socket);
 }
 
-fn checking_legality(p:String,f:String,t:String){
+fn checking_legality(p:String,f:String,t:String,toccupied:bool){
     alphabet = ["a","b","c","d","e","f","g","h"]
     let result=match p{
         "pawn" => {
@@ -47,12 +47,14 @@ fn checking_legality(p:String,f:String,t:String){
                 }
 
                 if(letter_to != letter_from){
-                    // if it changes into a differant row, it is illegal, but if an enemy is in the other row, it is legal
+                    if(toccupied && number_from==number_to+1 && letter_from_index==letter_to_index+1){
+                        "legal" // if the pawn changes lane, it has to have an enemy in the other lane
+                    }
+                    else{
+                        "illegal"
+                    }
                 }
-
-
             }
-
         }
         "knight" => checking_legality("knight"),
         "rook" => checking_legality("rook"),
@@ -65,8 +67,8 @@ fn checking_legality(p:String,f:String,t:String){
 }
 
 #[wasm_bindgen]
-pub fn send(lobby_number:i32,frompos:String,topos: String,peice:String){
-    result=checking_legality(&peice,&frompos,&topos)
+pub fn send(lobby_number:i32,frompos:String,topos: String,peice:String,toccupied:bool){
+    result=checking_legality(peice,frompos,topos,toccupied);
     socket.write_message(Message::Text(result.into())).unwrap();
 
 }
