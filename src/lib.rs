@@ -59,6 +59,32 @@ fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied sho
         }
         "knight" =>{
             let factory_positions = vec!["g1","b1","b8","g8"]
+            if(f in factory_positions){
+                if(f=="g1" && t=="f3"){
+                    "legal"
+                }
+                if(f=="g1" && t=="h3"){
+                    "legal"
+                }
+                if(f=="b1" && t=="a3"){
+                    "legal"
+                }
+                if(f=="b1" && t=="c3"){
+                    "legal"
+                }
+                if(f=="b8" && t=="a6"){
+                    "legal"
+                }
+                if(f=="b8" && t=="c6"){
+                    "legal"
+                }
+                if(f=="g8" && t=="f6"){
+                    "legal"
+                }
+                if(f=="g8" && t=="h6"){
+                    "legal"
+                }
+            }
         }
         "rook" => checking_legality("rook"),
         "bishop" => checking_legality("bishop"),
