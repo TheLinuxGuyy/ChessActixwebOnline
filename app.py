@@ -20,7 +20,7 @@ async def resp(websocket):
         }
     await websocket.send(json.dumps(response))
 
-async def main(lobby_number):
+async def main():
     async with websockets.serve(resp, "localhost", 5050):
         await asyncio.Future()  # run forever
 
