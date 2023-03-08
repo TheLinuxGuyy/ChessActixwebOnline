@@ -11,9 +11,9 @@ fn listening(){
             tungstenite::Message::Text(s) => { s }
             _ => { panic!() }
         };
-        result=msg
+        let parsed: serde_json::Value = serde_json::from_str(&msg).expect("Can't parse to JSON");
         
-        println!("{:?}", result);
+        println!("{:?}", parsed["result"]);
     }
 }
 

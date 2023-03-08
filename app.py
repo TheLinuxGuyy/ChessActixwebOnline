@@ -24,8 +24,11 @@ async def resp(websocket):
     async for message in websocket:
         #if message == "illegal":
         #if message == "legal":
-            response=message
-    await websocket.send(response)
+        response = {
+            'result': message
+        }
+    await websocket.send(json.dumps(response))
+
 async def main(lobby_number):
     async with websockets.serve(resp, f"https://127.0.0.1/{lobby_number}", 8765):
         await asyncio.Future()  # run forever
