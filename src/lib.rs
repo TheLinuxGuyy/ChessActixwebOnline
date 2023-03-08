@@ -50,6 +50,9 @@ fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied sho
                     if(toccupied && number_from==number_to+1 && letter_from_index==letter_to_index+1){
                         "legal" // if the pawn changes lane, it has to have an enemy in the other lane
                     }
+                    if(toccupied && number_from==number_to+1 && letter_from_index==letter_to_index-1){
+                        "legal"
+                    }
                     else{
                         "illegal"
                     }
@@ -84,6 +87,8 @@ fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied sho
                 if(f=="g8" && t=="h6"){
                     "legal"
                 }
+            }else{
+                
             }
         }
         "rook" => checking_legality("rook"),
