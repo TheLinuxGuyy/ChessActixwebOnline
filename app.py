@@ -26,15 +26,14 @@ async def main(lobby_number):
 
 
 class Chess:
-    @app.route("/",methods=["GET","POST"])
+    @app.route("/main",methods=["GET","POST"])
     def main():
         if request.method=="POST":
             asyncio.run(main())
+            redirect("/")
         return render_template("main.html")
     
     
-
-
 if __name__=="__main__":
     app.run(debug = True)
 
