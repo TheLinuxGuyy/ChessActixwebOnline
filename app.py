@@ -9,17 +9,7 @@ import json
 import asyncio
 import time
 app=Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 CURRENT_LOBBIES=dict()
-def create_database():
-    app.app_context().push()
-    db.create_all()
-
-class Lobbies(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    lobby_number = db.Column(db.String(20), nullable=False)
 
 async def resp(websocket):
     async for message in websocket:
@@ -31,7 +21,7 @@ async def resp(websocket):
     await websocket.send(json.dumps(response))
 
 async def main(lobby_number):
-    async with websockets.serve(resp, "https://127.0.0.1/"+lobby_number, 5050):
+    async with websockets.serve(resp, "localhost", 5050):
         await asyncio.Future()  # run forever
 
 
@@ -39,37 +29,13 @@ class Chess:
     @app.route("/",methods=["GET","POST"])
     def main():
         if request.method=="POST":
-            lobby_number=str(random.randint(1000,4000))
-            lobby_number_db= Lobbies.query.filter_by(lobby_number=lobby_number).first()
-            if lobby_number_db:
-                while lobby_number_db:
-                    lobby_number=str(random.randint(1000,4000))
-                    lobby_number_db= Lobbies.query.filter_by(lobby_number=lobby_number).first()
-            new_lobby=Lobbies(lobby_number=lobby_number)
-            db.session.add(new_lobby)
-            db.session.commit() 
-            print("MADE IT BUCKO")
-            for lobby in Lobbies.query.all():
-                if lobby.lobby_number in CURRENT_LOBBIES.keys():
-                    registered_lobby=True
-                else:
-                    CURRENT_LOBBIES[lobby.lobby_number]=1
-            redirect(f"/lobby/{lobby_number}")
-            time.sleep(10)
-            asyncio.run(main(lobby_number))
+            asyncio.run(main())
         return render_template("main.html")
     
-    @app.route("/lobby/<string:lobbynumber>")
-    def lobby(lobbynumber):
-        lobby_exists=Lobbies.query.filter_by(lobby_number=lobbynumber).first()
-        if lobby_exists:
-            return render_template("index.html",lobbynumber=lobbynumber)
-        return "this lobby does not exist"
     
 
 
 if __name__=="__main__":
-    create_database()
     app.run(debug = True)
 
 
