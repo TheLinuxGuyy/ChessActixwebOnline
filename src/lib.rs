@@ -87,6 +87,22 @@ fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied sho
                 if(f=="g8" && t=="h6"){
                     "legal"
                 }
+            }if(letter_to_index==letter_from_index+1 || letter_to_index==letter_from_index-1){
+                if(number_to==number_from+2 || letter_to==number_from-2){
+                    "legal"
+                }else{
+                    "illegal"
+                }
+            
+            }if(letter_to_index==letter_from_index+3 || letter_to_index==letter_from_index-3){
+                if(number_to==number_from+1 || number_to==number_from-1){
+                    "legal"
+                }else{
+                    "illegal"
+                }
+            }
+            else{
+                "illegal"
             }
         }
         "rook" => checking_legality("rook"),

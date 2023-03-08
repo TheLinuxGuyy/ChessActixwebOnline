@@ -7,6 +7,7 @@ from flask_login import UserMixin
 import websockets
 import json
 import asyncio
+import time
 app=Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -30,7 +31,7 @@ async def resp(websocket):
     await websocket.send(json.dumps(response))
 
 async def main(lobby_number):
-    async with websockets.serve(resp, f"https://127.0.0.1/{lobby_number}", 8765):
+    async with websockets.serve(resp, "https://127.0.0.1/"+lobby_number, 5050):
         await asyncio.Future()  # run forever
 
 
@@ -38,23 +39,24 @@ class Chess:
     @app.route("/",methods=["GET","POST"])
     def main():
         if request.method=="POST":
-            lobby_number=str(random.randint(0,400))
+            lobby_number=str(random.randint(1000,4000))
             lobby_number_db= Lobbies.query.filter_by(lobby_number=lobby_number).first()
             if lobby_number_db:
                 while lobby_number_db:
-                    lobby_number=str(random.randint(0,400))
+                    lobby_number=str(random.randint(1000,4000))
                     lobby_number_db= Lobbies.query.filter_by(lobby_number=lobby_number).first()
             new_lobby=Lobbies(lobby_number=lobby_number)
             db.session.add(new_lobby)
             db.session.commit() 
+            print("MADE IT BUCKO")
             for lobby in Lobbies.query.all():
                 if lobby.lobby_number in CURRENT_LOBBIES.keys():
                     registered_lobby=True
                 else:
                     CURRENT_LOBBIES[lobby.lobby_number]=1
-
-            asyncio.run(main(lobby_number))
             redirect(f"/lobby/{lobby_number}")
+            time.sleep(10)
+            asyncio.run(main(lobby_number))
         return render_template("main.html")
     
     @app.route("/lobby/<string:lobbynumber>")
