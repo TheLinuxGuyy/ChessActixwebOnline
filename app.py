@@ -15,9 +15,8 @@ CURRENT_LOBBIES=dict()
 def create_database():
     app.app_context().push()
     db.create_all()
-create_database()
 
-class Lobbies(db.Model, UserMixin):
+class Lobbies(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     lobby_number = db.Column(db.String(20), nullable=False)
 
@@ -69,6 +68,7 @@ class Chess:
 
 
 if __name__=="__main__":
-    app.run()
+    create_database()
+    app.run(debug = True)
 
 
