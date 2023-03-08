@@ -11,9 +11,9 @@ fn listening(){
             tungstenite::Message::Text(s) => { s }
             _ => { panic!() }
         };
-        let parsed: serde_json::Value = serde_json::from_str(&msg).expect("Can't parse to JSON");
+        result=msg
         
-        println!("{:?}", parsed["result"]);
+        println!("{:?}", result);
     }
 }
 
@@ -87,8 +87,6 @@ fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied sho
                 if(f=="g8" && t=="h6"){
                     "legal"
                 }
-            }else{
-                
             }
         }
         "rook" => checking_legality("rook"),
