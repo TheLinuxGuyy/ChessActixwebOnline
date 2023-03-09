@@ -8,6 +8,7 @@ import websockets
 import json
 import asyncio
 import time
+import threading
 app=Flask(__name__)
 CURRENT_LOBBIES=dict()
 
@@ -29,8 +30,8 @@ class Chess:
     @app.route("/main",methods=["GET","POST"])
     def main():
         if request.method=="POST":
-            asyncio.run(main())
-            redirect("/")
+            threading.Thread(target=asyncio.run(main())).start()
+            return redirect("/")
         return render_template("main.html")
     
     
