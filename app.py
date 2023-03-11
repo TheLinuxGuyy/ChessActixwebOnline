@@ -23,7 +23,7 @@ async def resp(websocket):
 
 async def main():
     async with websockets.serve(resp, "localhost", 5050):
-        await asyncio.Future()  # run forever
+        threading.Thread(target=await asyncio.Future()).start()  # run forever
 
 
 class Chess:
