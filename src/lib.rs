@@ -105,10 +105,12 @@ fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied sho
                 "illegal"
             }
         }
-        "rook" => checking_legality("rook"),
-        "bishop" => checking_legality("bishop"),
-        "king" => checking_legality("king"),
-        "queen" => checking_legality("queen"),
+        //"rook" =>{
+
+        }
+        //"bishop" => checking_legality("bishop"),
+        //"king" => checking_legality("king"),
+        //"queen" => checking_legality("queen"),
         _ => "not a vaild peice",
     }
 }
