@@ -25,7 +25,7 @@ pub fn connect(lobby_number) {
 }
 
 fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied should be true if it is an opposit color to the color that is going into the square 
-    alphabet = ["a","b","c","d","e","f","g","h"]
+    let alphabet = ["a","b","c","d","e","f","g","h"];
     let number_from: i32 = f[1].parse().unwrap();
     let number_to: i32 = t[1].parse().unwrap();
     let letter_from: String = f[0].parse().unwrap();
