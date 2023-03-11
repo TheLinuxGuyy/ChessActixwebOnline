@@ -12,27 +12,12 @@ import threading
 app=Flask(__name__)
 CURRENT_LOBBIES=dict()
 
-async def resp(websocket):
-    async for message in websocket:
-        #if message == "illegal":
-        #if message == "legal":
-        response = {
-            'result': message
-        }
-    await websocket.send(json.dumps(response))
 
-async def main():
-    async with websockets.serve(resp, "localhost", 5050):
-        threading.Thread(target=await asyncio.Future()).start()  # run forever
-
-
-class Chess:
-    @app.route("/main",methods=["GET","POST"])
-    def main():
-        if request.method=="POST":
-            threading.Thread(target=asyncio.run(main())).start()
-            return redirect("/")
-        return render_template("main.html")
+@app.route("/main",methods=["GET","POST"])
+def main():
+    if request.method=="POST":
+        return redirect("/")
+    return render_template("main.html")
     
     
 if __name__=="__main__":
