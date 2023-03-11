@@ -1,6 +1,24 @@
 use wqsm_bindgen::prelude::*;
 use tungstenite::{connect, Message};
 use url::Url;
+use serde_json;
+
+fn main() {    // Connect to the WS server locally
+    let (mut socket, _response) = connect(Url::parse("ws://localhost:8765").unwrap()).expect("Can't connect");    // Write a message containing "Hello, Test!" to the server
+    socket.write_message(Message::Text("Hello, Test!".into())).unwrap();
+    
+    // Loop forever, handling parsing each message
+    loop {
+        let msg = socket.read_message().expect("Error reading message");
+        let msg = match msg {
+            tungstenite::Message::Text(s) => { s }
+            _ => { panic!() }
+        };
+        let parsed: serde_json::Value = serde_json::from_str(&msg).expect("Can't parse to JSON");
+        println!("{:?}", parsed["result"]);
+    }
+}
+
 #[wasm_bindgen]
 pub fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied should be true if it is an opposit color to the color that is going into the square 
     let alphabet = ["a","b","c","d","e","f","g","h"];

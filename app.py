@@ -4,21 +4,37 @@ import requests
 from bs4 import BeautifulSoup
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+app=Flask(__name__)
+madelobby=False
+import asyncio
 import websockets
 import json
-import asyncio
-import time
-import threading
-app=Flask(__name__)
-CURRENT_LOBBIES=dict()
+async def echo(websocket):
+    async for message in websocket:
+        response = {
+            'error': None,
+            'result': message
+        }
+        await websocket.send(json.dumps(response))
+async def tmain():
+    async with websockets.serve(echo, "localhost", 8765):
+        await asyncio.Future()  # run forever
 
-
-@app.route("/main",methods=["GET","POST"])
+asyncio.run(tmain())
+@app.route("/",methods=["GET","POST"])
 def main():
     if request.method=="POST":
-        return redirect("/")
+        global madelobby
+        madelobby = True
+        return redirect("/main")
     return render_template("main.html")
-    
+
+@app.route("/main",methods=["GET","POST"])
+def chessboard():
+    if madelobby:
+        return render_template("index.html")
+    else:
+        return "there are no lobbies at the moment"
     
 if __name__=="__main__":
     app.run(debug = True)
