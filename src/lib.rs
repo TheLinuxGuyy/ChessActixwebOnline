@@ -2,7 +2,6 @@ use wqsm_bindgen::prelude::*;
 use tungstenite::{connect, Message};
 use url::Url;
 use serde_json;
-
 fn main() {    // Connect to the WS server locally
     let (mut socket, _response) = connect(Url::parse("ws://localhost:8765").unwrap()).expect("Can't connect");    // Write a message containing "Hello, Test!" to the server
     socket.write_message(Message::Text("Hello, Test!".into())).unwrap();
