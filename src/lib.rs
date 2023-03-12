@@ -20,6 +20,8 @@ fn main() {    // Connect to the WS server locally
 
 #[wasm_bindgen]
 pub fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied should be true if it is an opposit color to the color that is going into the square 
+    let window = web_sys::window().expect("no global `window` exists");
+
     let alphabet = ["a","b","c","d","e","f","g","h"];
     let number_from: i32 = f[1].parse().unwrap();
     let number_to: i32 = t[1].parse().unwrap();
@@ -101,6 +103,14 @@ pub fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied
             }
         }
         //"rook" =>{
+        //    if(letter_from == letter_to){
+        //        for num in number_from..number_to{
+        //            document 
+        //            .get_element_by_id("{}{}",letter_from,num)
+        //              check if there is a peice here ^
+
+        //        }
+        //    }
 
         }
         //"bishop" => checking_legality("bishop"),
