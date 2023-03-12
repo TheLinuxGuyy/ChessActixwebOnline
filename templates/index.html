@@ -126,6 +126,25 @@
         var ChessBoard = document.getElementById('chess-board');
         var squares = ChessBoard.getElementsByTagName('td');
         var FromTo = [];
+        function rook(){
+            result = true
+            if(ToPeice.id[0]==FromPeicePos.id[0]){ // if from position and to position have the same letter, then you check if the number goes up
+                if(FromPeicePos.id[1]<ToPeice.id[1]){
+                    for(var i=FromPeicePos.id[1]; i<= ToPeice.id[1]; i++){
+                        if(document.getElementById(`${ToPeice.id[0]}${i}`).innerText!=""){
+                            let result = false
+                    }
+                }
+            }else{
+                if(FromPeicePos.id[1]>ToPeice.id[1]){ // if peice going backwards
+                    for(var i=ToPeice.id[1]; i<= FromPeicePos.id[1]; i++){
+                        if(document.getElementById(`${ToPeice.id[0]}${i}`).innerText!=""){
+                            let result=false
+                        }
+                }
+            }}
+            }
+        }
         function movecolor(id,color) {  
             document.getElementById(id.id).setAttribute("name",color);
         }
@@ -138,16 +157,12 @@
                 if(ToPeice.innerText==""){
                     console.log(ToPeice.id)
                     console.log(FromPeicePos.id)
-                    if(ToPeice.id[0]==FromPeicePos.id[0]){ // if from position and to position have the same letter, then you check if the number goes up
-                        for(var i=FromPeicePos.id[1]; i<= ToPeice.id[1]; i++){
-                            if(document.getElementById(`${ToPeice.id[0]}${i}`).innerText!=""){
-
-                            }
-                    }}
-                    var text = document.createTextNode(FromPeice);
-                    FromPeicePos.innerText = "";
-                    ToPeice.appendChild(text);
-                    movecolor(ToPeice,FromPeicePos.getAttribute("name"));
+                    if(result){
+                        var text = document.createTextNode(FromPeice);
+                        FromPeicePos.innerText = "";
+                        ToPeice.appendChild(text);
+                        movecolor(ToPeice,FromPeicePos.getAttribute("name"));
+                    }
                 }else{
                     if(ToPeice.getAttribute("name") != FromPeicePos.getAttribute("name")){
                         var text = document.createTextNode(FromPeice);
@@ -165,7 +180,6 @@
         for (let square of squares) {
             square.addEventListener("click", buttonPressed);
         }
-
         </script>
     </body>
 </html>
