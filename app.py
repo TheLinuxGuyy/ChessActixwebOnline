@@ -18,14 +18,14 @@ async def echo(websocket):
         await websocket.send(json.dumps(response))
 async def tmain():
     async with websockets.serve(echo, "localhost", 8765):
-        await asyncio.Future()  # run forever
+        await asyncio.Future()
 
-asyncio.run(tmain())
 @app.route("/",methods=["GET","POST"])
 def main():
     if request.method=="POST":
         global madelobby
         madelobby = True
+        asyncio.run(tmain())
         return redirect("/main")
     return render_template("main.html")
 
