@@ -58,33 +58,8 @@ pub fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied
             }
         }
         "knight" =>{
-            let factory_positions = vec!["g1","b1","b8","g8"]
-            if(f in factory_positions){
-                if(f=="g1" && t=="f3"){
-                    "legal"
-                }
-                if(f=="g1" && t=="h3"){
-                    "legal"
-                }
-                if(f=="b1" && t=="a3"){
-                    "legal"
-                }
-                if(f=="b1" && t=="c3"){
-                    "legal"
-                }
-                if(f=="b8" && t=="a6"){
-                    "legal"
-                }
-                if(f=="b8" && t=="c6"){
-                    "legal"
-                }
-                if(f=="g8" && t=="f6"){
-                    "legal"
-                }
-                if(f=="g8" && t=="h6"){
-                    "legal"
-                }
-            }if(letter_to_index==letter_from_index+1 || letter_to_index==letter_from_index-1){
+            let factory_positions = vec!["g1","b1","b8","g8"];
+            if(letter_to_index==letter_from_index+1 || letter_to_index==letter_from_index-1){
                 if(number_to==number_from+2 || letter_to==number_from-2){
                     "legal"
                 }else{
@@ -102,15 +77,15 @@ pub fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied
                 "illegal"
             }
         }
-        //"rook" =>{
-        //    if(letter_from == letter_to){
-        //        for num in number_from..number_to{
-        //            document 
-        //            .get_element_by_id("{}{}",letter_from,num)
-        //              check if there is a peice here ^
+        "rook" =>{
+            if(letter_from == letter_to){
+                for num in number_from..number_to{
+                    if(document.get_element_by_id("{}{}",letter_from,num).unwrap()){
 
-        //        }
-        //    }
+                    }
+
+                }
+            }
 
         }
         //"bishop" => checking_legality("bishop"),
