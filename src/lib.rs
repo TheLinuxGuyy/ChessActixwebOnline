@@ -81,7 +81,7 @@ pub fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied
             if(letter_from == letter_to){
                 for num in number_from..number_to{
                     if(document.get_element_by_id("{}{}",letter_from,num).unwrap()){
-
+                        
                     }
 
                 }
