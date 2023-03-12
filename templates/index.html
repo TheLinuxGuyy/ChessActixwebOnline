@@ -129,21 +129,25 @@
         function rook(){
             result = true
             if(ToPeice.id[0]==FromPeicePos.id[0]){ // if from position and to position have the same letter, then you check if the number goes up
-                if(FromPeicePos.id[1]<ToPeice.id[1]){
-                    for(var i=FromPeicePos.id[1]; i<= ToPeice.id[1]; i++){
+                if(parseInt(FromPeicePos.id[1])<parseInt(ToPeice.id[1])){
+                    for(var i=parseInt(FromPeicePos.id[1]); i<= parseInt(ToPeice.id[1]); i++){
                         if(document.getElementById(`${ToPeice.id[0]}${i}`).innerText!=""){
                             let result = false
                     }
                 }
             }else{
-                if(FromPeicePos.id[1]>ToPeice.id[1]){ // if peice going backwards
-                    for(var i=ToPeice.id[1]; i<= FromPeicePos.id[1]; i++){
+                if(parseInt(FromPeicePos.id[1])>parseInt(ToPeice.id[1])){ // if peice going backwards
+                    for(var i=parseInt(ToPeice.id[1]); i<= parseInt(FromPeicePos.id[1]); i++){
                         if(document.getElementById(`${ToPeice.id[0]}${i}`).innerText!=""){
                             let result=false
                         }
                 }
             }}
             }
+            else{
+
+            }
+
         }
         function movecolor(id,color) {  
             document.getElementById(id.id).setAttribute("name",color);
