@@ -77,17 +77,7 @@ pub fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied
                 "illegal"
             }
         }
-        "rook" =>{
-            if(letter_from == letter_to){
-                for num in number_from..number_to{
-                    if(document.get_element_by_id("{}{}",letter_from,num).unwrap()){
-                        
-                    }
 
-                }
-            }
-
-        }
         //"bishop" => checking_legality("bishop"),
         //"king" => checking_legality("king"),
         //"queen" => checking_legality("queen"),

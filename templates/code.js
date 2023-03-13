@@ -52,7 +52,9 @@ function rook(){
     else{
         return "illegal"
     }
-
+function bishop(){
+    
+}
 }
 function movecolor(id,color) {  
     document.getElementById(id.id).setAttribute("name",color);
