@@ -63,23 +63,28 @@ const buttonPressed = e => {
         let FromPeicePos = document.getElementById(FromTo[0]);
         let FromPeice = document.getElementById(FromTo[0]).innerText;
         let ToPeice = document.getElementById(FromTo[1]);
-        if(ToPeice.innerText==""){
-            console.log(ToPeice.id)
-            console.log(FromPeicePos.id)
-            if(result){
+        switch(FromPeice){
+            case '♜':
+                let result=rook();
+                break;
+        }
+        if(result=="legal"){
+            if(ToPeice.innerText==""){
+                console.log(ToPeice.id)
+                console.log(FromPeicePos.id)
                 var text = document.createTextNode(FromPeice);
                 FromPeicePos.innerText = "";
                 ToPeice.appendChild(text);
                 movecolor(ToPeice,FromPeicePos.getAttribute("name"));
-            }
-        }else{
-            if(ToPeice.getAttribute("name") != FromPeicePos.getAttribute("name")){
-                var text = document.createTextNode(FromPeice);
-                FromPeicePos.innerText = "";
-                ToPeice.innerText=""
-                ToPeice.appendChild(text);
-                movecolor(ToPeice,FromPeicePos.getAttribute("name"));
+            }else{
+                if(ToPeice.getAttribute("name") != FromPeicePos.getAttribute("name")){
+                    var text = document.createTextNode(FromPeice);
+                    FromPeicePos.innerText = "";
+                    ToPeice.innerText=""
+                    ToPeice.appendChild(text);
+                    movecolor(ToPeice,FromPeicePos.getAttribute("name"));
 
+                }
             }
         }
         FromTo = [];
