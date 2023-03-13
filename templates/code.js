@@ -5,19 +5,18 @@ var squares = ChessBoard.getElementsByTagName('td');
 var FromTo = [];
 function rook(){
     alphabet=["a","b","c","d","e","f","g","h"];
-    result = true
     if(ToPeice.id[0]==FromPeicePos.id[0]){ // if from position and to position have the same letter, then you check if the number goes up
         if(parseInt(FromPeicePos.id[1])<parseInt(ToPeice.id[1])){
             for(var i=parseInt(FromPeicePos.id[1]); i<= parseInt(ToPeice.id[1]); i++){
                 if(document.getElementById(`${ToPeice.id[0]}${i}`).innerText!=""){
-                    let result = false
+                    return "illegal"
             }
         }
     }else{
         if(parseInt(FromPeicePos.id[1])>parseInt(ToPeice.id[1])){ // if peice going backwards
             for(var i=parseInt(ToPeice.id[1]); i<= parseInt(FromPeicePos.id[1]); i++){
                 if(document.getElementById(`${ToPeice.id[0]}${i}`).innerText!=""){
-                    let result=false
+                    return "illegal"
                 }
         }
     }}
@@ -26,7 +25,16 @@ function rook(){
         if(ToPeice.id[1]==FromPiecePos.id[1]){
             FromPeicePosIndex=alphabet.indexOf(FromPeicePos.id[0])
             ToPeiceIndex=alphabet.indexOf(ToPeice.id[0])
-	    
+            if(ToPeice.id[1] > FromPeicePos.id[1]){
+                for(let i = FromPeicePosIndex; i<ToPieceIndex; i++){
+                    let current_letter = alphabet[i]
+                    if(document.getElementById(`${current_letter}${ToPeice.id[1]}`).innerText!=""){
+                        return "illegal"
+                    }else{
+                        return "legal"
+                    }
+                }
+            }
         }
     }
 
