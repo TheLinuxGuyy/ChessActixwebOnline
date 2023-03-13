@@ -4,6 +4,7 @@ var ChessBoard = document.getElementById('chess-board');
 var squares = ChessBoard.getElementsByTagName('td');
 var FromTo = [];
 function rook(){
+    alphabet=["a","b","c","d","e","f","g","h"];
     result = true
     if(ToPeice.id[0]==FromPeicePos.id[0]){ // if from position and to position have the same letter, then you check if the number goes up
         if(parseInt(FromPeicePos.id[1])<parseInt(ToPeice.id[1])){
@@ -22,7 +23,11 @@ function rook(){
     }}
     }
     else{
-
+        if(ToPeice.id[1]==FromPiecePos.id[1]){
+            FromPeicePosIndex=alphabet.indexOf(FromPeicePos.id[0])
+            ToPeiceIndex=alphabet.indexOf(ToPeice.id[0])
+	    
+        }
     }
 
 }
