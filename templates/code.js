@@ -29,7 +29,7 @@ function rook(){
     if(ToPeice.id[1]==FromPiecePos.id[1]){
             FromPeicePosIndex=alphabet.indexOf(FromPeicePos.id[0])
             ToPeiceIndex=alphabet.indexOf(ToPeice.id[0])
-            if(ToPeice.id[1] > FromPeicePos.id[1]){
+            if(ToPeice.id[0] > FromPeicePos.id[1]){
                 for(let i = FromPeicePosIndex; i<ToPieceIndex; i++){
                     let current_letter = alphabet[i]
                     if(document.getElementById(`${current_letter}${ToPeice.id[1]}`).innerText!=""){
@@ -37,6 +37,11 @@ function rook(){
                     }else{
                         return "legal"
                     }
+                }
+            }if(ToPeice.id[1]<FromPeicePos.id[1]){
+                for(let i=ToPieceIndex; i<FromPeicePosIndex; i++){
+                    let current_letter=alphabet[i]
+                    if
                 }
             }
         }
