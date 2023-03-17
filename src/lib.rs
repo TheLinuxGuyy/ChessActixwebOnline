@@ -19,7 +19,7 @@ fn main() {    // Connect to the WS server locally
 }
 
 #[wasm_bindgen]
-pub fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied should be true if it is an opposit color to the color that is going into the square 
+pub fn checking_legality(p:String,f:String,t:String,toccupied:bool) ->bool{ //toccupied should be true if it is an opposit color to the color that is going into the square 
     let window = web_sys::window().expect("no global `window` exists");
 
     let alphabet = ["a","b","c","d","e","f","g","h"];
@@ -54,7 +54,6 @@ pub fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied
                         "illegal"
                     }
                 }
-                if(t==f[1].replace(number_to.to_string(),number_to+1.to_string())
             }
         }
         "knight" =>{
@@ -77,7 +76,17 @@ pub fn checking_legality(p:String,f:String,t:String,toccupied:bool){ //toccupied
                 "illegal"
             }
         }
+        //"rook" =>{
+        //    if(letter_from == letter_to){
+        //        for num in number_from..number_to{
+        //            if(document.get_element_by_id("{}{}",letter_from,num).unwrap()){
+        
+        //            }
+        
+        //        }
+        //    }
 
+        }
         //"bishop" => checking_legality("bishop"),
         //"king" => checking_legality("king"),
         //"queen" => checking_legality("queen"),
