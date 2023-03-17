@@ -44,10 +44,10 @@ pub fn checking_legality(p:String,f:String,t:String,toccupied:bool) ->bool{ //to
                 }
 
                 if(letter_to != letter_from){
-                    if(toccupied && number_from==number_to+1 && letter_from_index==letter_to_index+1){
+                    if(toccupied && number_to==number_from+1 && letter_to_index==letter_from_index+1){
                         "legal" // if the pawn changes lane, it has to have an enemy in the other lane
                     }
-                    if(toccupied && number_from==number_to+1 && letter_from_index==letter_to_index-1){
+                    if(toccupied && number_to==number_from+1 && letter_to_index==letter_from_index-1){
                         "legal"
                     }
                     else{
