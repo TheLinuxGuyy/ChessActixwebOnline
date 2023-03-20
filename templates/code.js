@@ -18,7 +18,7 @@ function rook(){
         if(parseInt(FromPeicePos.id[1])>parseInt(ToPeice.id[1])){ // if peice going backwards
             for(var i=parseInt(ToPeice.id[1]); i<= parseInt(FromPeicePos.id[1]); i++){
                 if(document.getElementById(`${ToPeice.id[0]}${i}`).innerText!=""){
-                    return "illegal"
+                    return "illegal" // this means there is a peice inbetween from and to
                 }else{
                     return "legal"
                 }
@@ -54,6 +54,21 @@ function rook(){
     }
 
 }
+
+function bishop(){
+    alphabet=["a","b","c","d","e","f","g","h"];
+    if(FromPeicePos[0] != ToPeice[0] && FromPeicePos[1] !=ToPeice[1]){
+
+        
+
+        for(let i=; i<alphabet.length; i++){
+            
+        }
+    }else{
+        "illegal"
+    }
+}
+
 function movecolor(id,color) {  
     document.getElementById(id.id).setAttribute("name",color);
 }

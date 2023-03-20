@@ -16,7 +16,8 @@ async def echo(websocket):
             'result': message
         }
         await websocket.send(json.dumps(response))
-async def tmain():
+async def socketserver():
+    print("YES YES YES YES YES YES YESY ESYEESYYE WAONDSAUI")
     async with websockets.serve(echo, "localhost", 8765):
         await asyncio.Future()
 
@@ -25,7 +26,6 @@ def main():
     if request.method=="POST":
         global madelobby
         madelobby = True
-        asyncio.run(tmain())
         return redirect("/main")
     return render_template("main.html")
 
@@ -37,6 +37,7 @@ def chessboard():
         return "there are no lobbies at the moment"
     
 if __name__=="__main__":
+    asyncio.run(socketserver())
     app.run(debug = True)
 
 
