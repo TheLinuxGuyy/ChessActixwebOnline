@@ -196,12 +196,13 @@
                 let FromPeicePos = document.getElementById(FromTo[0]);
                 let FromPeice = document.getElementById(FromTo[0]).innerText;
                 let ToPeice = document.getElementById(FromTo[1]);
+                let toccupied= ToPeice.name!=FromPeice.name
                 switch(FromPeice){
                     case '♜':
                         let result=rook();
                         return result;
                     case '♟':
-                        let result = wasm.add()
+                        let result = wasm.check_legality("pawn",FromPeicePos,ToPeice)
                         return result;
 
                     default:
