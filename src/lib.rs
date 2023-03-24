@@ -41,28 +41,56 @@ pub fn checking_legality(p:String,f:String,t:String,toccupied:bool) ->bool{ //to
     let result=match p{
         "pawn" => {
             let factory_positions = vec!["a7","b7","c7","d7","e7","f7","g7","h7","a2","b2","c2","d2","e2","f2","g2","h2"];
-            if(f in factory_positions){
-                if(t==f.replace(number_to.to_string(),number_to+1.to_string()) || f.replace(number_to.to_string(),number_to+2.to_string()){
-                    "legal" //going forward twice or once
+            if(color=="white"){
+                if(f in factory_positions){
+                    if(t==f.replace(number_to.to_string(),number_to+1.to_string()) || f.replace(number_to.to_string(),number_to+2.to_string()){
+                        "legal" //going forward twice or once
+                    }else{
+                        "illegal" // if you dont go forward once or twice at the start of the round, it is illegal
+                    }
                 }else{
-                    "illegal" // if you dont go forward once or twice at the start of the round, it is illegal
-                }
-            }else{
-                if(number_from>number_to){ //going backwards
-                    "illegal"
-                }
-
-                if(letter_to != letter_from){
-                    if(toccupied && number_to==number_from+1 && letter_to_index==letter_from_index+1){
-                        "legal" // if the pawn changes lane, it has to have an enemy in the other lane
-                    }
-                    if(toccupied && number_to==number_from+1 && letter_to_index==letter_from_index-1){
-                        "legal"
-                    }
-                    else{
+                    if(number_from>number_to){ //going backwards
                         "illegal"
                     }
+
+                    if(letter_to != letter_from){
+                        if(toccupied && number_to==number_from+1 && letter_to_index==letter_from_index+1){
+                            "legal" // if the pawn changes lane, it has to have an enemy in the other lane
+                        }
+                        if(toccupied && number_to==number_from+1 && letter_to_index==letter_from_index-1){
+                            "legal"
+                        }
+                        else{
+                            "illegal"
+                        }
+                    }
                 }
+            }
+            else{
+                if(f in factory_positions){
+                    if(t==f.replace(number_to.to_string(),number_to-1.to_string()) || f.replace(number_to.to_string(),number_to-1.to_string()){
+                        "legal" //going forward twice or once
+                    }else{
+                        "illegal" // if you dont go forward once or twice at the start of the round, it is illegal
+                    }
+                }else{
+                    if(number_from<number_to){ //going backwards
+                        "illegal"
+                    }
+
+                    if(letter_to != letter_from){
+                        if(toccupied && number_to==number_from-1 && letter_to_index==letter_from_index-1){
+                            "legal" // if the pawn changes lane, it has to have an enemy in the other lane
+                        }
+                        if(toccupied && number_to==number_from-1 && letter_to_index==letter_from_index+1){
+                            "legal"
+                        }
+                        else{
+                            "illegal"
+                        }
+                    }
+                }
+            }
             }
         }
         "knight" =>{

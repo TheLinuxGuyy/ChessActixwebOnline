@@ -32,25 +32,25 @@
                 </tr>
                 <tr>
                     <th>8</th>
-                    <td name="white" id="a8" class="light">♜</td>
-                    <td name="white" id="b8" class="dark">♞</td>
-                    <td name="white" id="c8" class="light">♝</td>
-                    <td name="white" id="d8" class="dark">♛</td>
-                    <td name="white" id="e8" class="light">♚</td>
-                    <td name="white" id="f8" class="dark">♝</td>
-                    <td name="white" id="g8" class="light">♞</td>
-                    <td name="white" id="h8" class="dark">♜</td>
+                    <td name="black" id="a8" class="light">♜</td>
+                    <td name="black" id="b8" class="dark">♞</td>
+                    <td name="black" id="c8" class="light">♝</td>
+                    <td name="black" id="d8" class="dark">♛</td>
+                    <td name="black" id="e8" class="light">♚</td>
+                    <td name="black" id="f8" class="dark">♝</td>
+                    <td name="black" id="g8" class="light">♞</td>
+                    <td name="black" id="h8" class="dark">♜</td>
                 </tr>
                 <tr>
                     <th>7</th>
-                    <td name="white" id="a7" class="dark">♟</td>
-                    <td name="white" id="b7" class="light">♟</td>
-                    <td name="white" id="c7" class="dark">♟</td>
-                    <td name="white" id="d7" class="light">♟</td>
-                    <td name="white" id="e7" class="dark">♟</td>
-                    <td name="white" id="f7" class="light">♟</td>
-                    <td name="white" id="g7" class="dark">♟</td>
-                    <td name="white" id="h7" class="light">♟</td>
+                    <td name="black" id="a7" class="dark">♟</td>
+                    <td name="black" id="b7" class="light">♟</td>
+                    <td name="black" id="c7" class="dark">♟</td>
+                    <td name="black" id="d7" class="light">♟</td>
+                    <td name="black" id="e7" class="dark">♟</td>
+                    <td name="black" id="f7" class="light">♟</td>
+                    <td name="black" id="g7" class="dark">♟</td>
+                    <td name="black" id="h7" class="light">♟</td>
                 </tr>
                 <tr>
                     <th>6</th>
@@ -98,25 +98,25 @@
                 </tr>
                 <tr>
                     <th>2</th>
-                    <td name="black" id="a2" class="light">♙</td>
-                    <td name="black" id="b2" class="dark">♙</td>
-                    <td name="black" id="c2" class="light">♙</td>
-                    <td name="black" id="d2" class="dark">♙</td>
-                    <td name="black" id="e2" class="light">♙</td>
-                    <td name="black" id="f2" class="dark">♙</td>
-                    <td name="black" id="g2" class="light">♙</td>
-                    <td name="black" id="h2" class="dark">♙</td>
+                    <td name="white" id="a2" class="light">♙</td>
+                    <td name="white" id="b2" class="dark">♙</td>
+                    <td name="white" id="c2" class="light">♙</td>
+                    <td name="white" id="d2" class="dark">♙</td>
+                    <td name="white" id="e2" class="light">♙</td>
+                    <td name="white" id="f2" class="dark">♙</td>
+                    <td name="white" id="g2" class="light">♙</td>
+                    <td name="white" id="h2" class="dark">♙</td>
                 </tr>
                 <tr>
                     <th>1</th>
-                    <td name="black" id="a1" class="dark">♖</td>
-                    <td name="black" id="b1" class="light">♘</td>
-                    <td name="black" id="c1" class="dark">♗</td>
-                    <td name="black" id="d1" class="light">♕</td>
-                    <td name="black" id="e1" class="dark">♔</td>
-                    <td name="black" id="f1" class="light">♗</td>
-                    <td name="black" id="g1" class="dark">♘</td>
-                    <td name="black" id="h1" class="light">♖</td>
+                    <td name="white" id="a1" class="dark">♖</td>
+                    <td name="white" id="b1" class="light">♘</td>
+                    <td name="white" id="c1" class="dark">♗</td>
+                    <td name="white" id="d1" class="light">♕</td>
+                    <td name="white" id="e1" class="dark">♔</td>
+                    <td name="white" id="f1" class="light">♗</td>
+                    <td name="white" id="g1" class="dark">♘</td>
+                    <td name="white" id="h1" class="light">♖</td>
                 </tr>
             </tbody>
         </table>
@@ -180,7 +180,8 @@
         function bishop(){
             alphabet=["a","b","c","d","e","f","g","h"];
             if(FromPeicePos[0] != ToPeice[0] && FromPeicePos[1] !=ToPeice[1]){
-
+                FromPeicePosFor=alpahbet.IndexOf(FromPeicePos[0]);
+                ToPeicePosFor=aplhabet.IndexOf(ToPeice[0]);
                 
             }else{
                 "illegal"
@@ -199,14 +200,14 @@
                 let toccupied= ToPeice.name!=FromPeice.name
                 switch(FromPeice){
                     case '♜':
-                        let result=rook();
+                        result=rook();
                         return result;
                     case '♟':
-                        let result = wasm.check_legality("pawn",FromPeicePos,ToPeice)
+                        result = wasm.check_legality("pawn",FromPeicePos,ToPeice,toccupied)
                         return result;
 
                     default:
-                        let result="illegal";
+                        result="illegal";
                 }
                 if(result=="legal"){
                     if(ToPeice.innerText==""){

@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+import threading
 app=Flask(__name__)
 madelobby=False
 import asyncio
@@ -17,9 +18,11 @@ async def echo(websocket):
         }
         await websocket.send(json.dumps(response))
 async def socketserver():
-    print("YES YES YES YES YES YES YESY ESYEESYYE WAONDSAUI")
     async with websockets.serve(echo, "localhost", 8765):
         await asyncio.Future()
+
+thread1=threading.Thread(target=asyncio.run(socketserver()))
+thread1.start()
 
 @app.route("/",methods=["GET","POST"])
 def main():
@@ -37,7 +40,7 @@ def chessboard():
         return "there are no lobbies at the moment"
     
 if __name__=="__main__":
-    asyncio.run(socketserver())
+    #asyncio.run(socketserver())
     app.run(debug = True)
 
 
