@@ -131,18 +131,18 @@
                 if(parseInt(FromPeicePos.id[1])<parseInt(ToPeice.id[1])){
                     for(var i=parseInt(FromPeicePos.id[1]); i<= parseInt(ToPeice.id[1]); i++){
                         if(document.getElementById(`${ToPeice.id[0]}${i}`).innerText!=""){
-                            return "illegal"
+                            return "illegal";
                         }else{
-                            return "legal"
+                            return "legal";
                         }
                 }
             }else{
                 if(parseInt(FromPeicePos.id[1])>parseInt(ToPeice.id[1])){ // if peice going backwards
                     for(var i=parseInt(ToPeice.id[1]); i<= parseInt(FromPeicePos.id[1]); i++){
                         if(document.getElementById(`${ToPeice.id[0]}${i}`).innerText!=""){
-                            return "illegal" // this means there is a peice inbetween from and to
+                            return "illegal"; // this means there is a peice inbetween from and to
                         }else{
-                            return "legal"
+                            return "legal";
                         }
                 }
             }}
@@ -155,24 +155,24 @@
                         for(let i = FromPeicePosIndex; i<ToPieceIndex; i++){
                             let current_letter = alphabet[i]
                             if(document.getElementById(`${current_letter}${ToPeice.id[1]}`).innerText!=""){
-                                return "illegal"
+                                return "illegal";
                             }else{
-                                return "legal"
+                                return "legal";
                             }
                         }
                     }if(alphabet.IndexOf(ToPeice.id[0])< alphabet.IndexOf(FromPeicePos.id[0])){
                         for(let i=ToPieceIndex; i<FromPeicePosIndex; i++){
                             let current_letter=alphabet[i]
                             if(document.getElementById(`${current_letter}${ToPeice.id[1]}`).innerText!=""){
-                                return "illegal"
+                                return "illegal";
                             }else{
-                                return "legal"
+                                return "legal";
                             }
                         }
                     }
                 }
             else{
-                return "illegal"
+                return "illegal";
             }
 
         }
@@ -182,9 +182,16 @@
             if(FromPeicePos[0] != ToPeice[0] && FromPeicePos[1] !=ToPeice[1]){
                 FromPeicePosFor=alpahbet.IndexOf(FromPeicePos[0]);
                 ToPeicePosFor=aplhabet.IndexOf(ToPeice[0]);
-                
+                if(FromPeicePos[1]<ToPeice[1]){
+                    for(let i=parseInt(FromPeicePos[1]); i<parseInt(ToPeicePosFor[1]); i++){
+                        if(document.getElementById(`${alphabet[i]}${i}`).innerText!=""){
+                            return "illegal";
+                        }
+                    }
+                    return "legal";
+                }
             }else{
-                "illegal"
+                return"illegal";
             }
         }
 
