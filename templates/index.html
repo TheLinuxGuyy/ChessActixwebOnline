@@ -190,6 +190,13 @@
                     }
                     return "legal";
                 }
+                if(FromPeicePos[1]>ToPeice[1]){
+                   for(let i=parseInt(ToPeicePosFor[1]); i<parseInt(FromPeicePos[1]); i++){
+                        if(document.getElementById(`${alphabet[i]}${i}`).innerText!=""){
+                            return "illegal";
+                    }
+                   }return "legal"; 
+                }
             }else{
                 return"illegal";
             }
